@@ -1,15 +1,16 @@
-import { exit } from "./exit/exit.mjs";
-import { showMenu } from "./menu/menu.mjs";
-import { browsePosts } from "./menu/options/browse_posts/browse_posts.mjs";
-import { sendMessage } from "./menu/options/send_message/send_message.mjs";
-import { showAllPosts } from "./menu/options/show_all_posts/show_all_posts.mjs";
-import { showAllUsers } from "./menu/options/show_all_users/show_all_users.mjs";
-import { State } from "./states/state.mjs";
-import { states } from "./states/states.mjs";
-import { clear, print, printNewLine, prompt } from "./ui/console.mjs";
+import { exit } from "./exit/exit";
+import { showMenu } from "./menu/menu";
+import { addUserMenu } from "./menu/options/add_user/add_user";
+import { browsePosts } from "./menu/options/browse_posts/browse_posts";
+import { sendMessage } from "./menu/options/send_message/send_message";
+import { showAllPosts } from "./menu/options/show_all_posts/show_all_posts";
+import { showAllUsers } from "./menu/options/show_all_users/show_all_users";
+import { State } from "./states/state";
+import { states, StateType } from "./states/states";
+import { clear, print, printNewLine, prompt } from "./ui/console";
 
 async function begin() {
-	clear(true);
+	clear("yes");
 	print("👋 Welcome to our cool blog browser!");
 	await prompt("⌨️ Press [ENTER] to continue! 🕶️");
 	main();
@@ -25,38 +26,37 @@ async function main() {
 				state.set(newMenuOption);
 				break;
 			case "SEND_MESSAGE":
-				const nextState = await sendMessage();
+				const nextState: StateType = await sendMessage();
 				state.set(nextState);
 				break;
 			case "SHOW_POSTS":
-				clear();
+				clear("yes");
 				const posts = await showAllPosts();
 				state.set(states.MENU);
 				break;
 			case "SHOW_USERS":
-				clear();
+				clear("yes");
 				const users = await showAllUsers();
 				state.set(states.MENU);
 				break;
 			case "BROWSE_POSTS":
-				clear();
+				clear("yes");
 				const post = await browsePosts();
 				state.set(states.MENU);
 				break;
 			case "ADD_USER":
-				clear();
-				print("🏗️  This functionality has not been implemented!");
-				await prompt("⌨️ Press [ENTER] to return to the main menu! 🕶️");
+				clear("yes");
+				const username = await addUserMenu();
 				state.set(states.MENU);
 				break;
 			case "UNKNOWN":
-				clear();
+				clear("yes");
 				print("😵 We have entered an unknown state.");
 				await prompt("⌨️ Press [ENTER] to return to the main menu! 🕶️");
 				state.set(states.MENU);
 				break;
 			case "CABBAGE":
-				clear();
+				clear("yes");
 				print("🥬🥬🥬🥬🥬🥬🥬🥬🥬🥬🥬🥬🥬🥬🥬🥬🥬🥬", false);
 				print("🥬      CABBAGE MODE UNLOCKED     🥬", false);
 				print("🥬     Why did you want this?     🥬", false);
@@ -65,7 +65,7 @@ async function main() {
 				state.set(states.MENU);
 				break;
 			default:
-				clear();
+				clear("yes");
 				print(`🌋 😱 Uh-oh, we've entered an invalid state: "${state.get()}"`);
 				print("💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥", false);
 				print("💥 Crashing the program now...  💥", false);

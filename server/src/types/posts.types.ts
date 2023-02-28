@@ -10,3 +10,5 @@ export type Post = {
 	text: string;
 	author: User;
 };
+
+export type UserArray = User[];

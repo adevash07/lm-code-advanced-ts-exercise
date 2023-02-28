@@ -1,9 +1,9 @@
-import { sendMessageToServer } from "../../../api/send_message_to_server.mjs";
-import { states } from "../../../states/states.mjs";
-import { clear, print, printNewLine, prompt } from "../../../ui/console.mjs";
+import { sendMessageToServer } from "../../../api/send_message_to_server";
+import { states, StateType } from "../../../states/states";
+import { clear, print, printNewLine, prompt } from "../../../ui/console";
 
-export async function sendMessage() {
-	clear();
+export async function sendMessage(): Promise<StateType> {
+	clear("nope");
 
 	const message = await prompt("What message shall we send? ");
 
