@@ -37,7 +37,7 @@ export function getUserById(id: string): User | undefined {
 
 export function addUser(user: User): boolean {
 	// in the absence of a true Model layer, our service can simply return a hard-coded array of users
-
+	console.log(`📨 Adding user ${user.name}`);
 	UserDatabase.push(user);
 
 	return true;

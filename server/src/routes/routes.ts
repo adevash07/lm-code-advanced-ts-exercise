@@ -94,8 +94,9 @@ function addAPIRoutes(app: Express) {
 
 	apiRouter.post("/users/add", (req, res) => {
 		const { body } = req;
+		console.log(`👋 Received "${body.username}"`);
 
-		const status = addUser(body);
+		const status = addUser(body.username);
 
 		res.status(200).send(JSON.stringify({ success: status }));
 	});

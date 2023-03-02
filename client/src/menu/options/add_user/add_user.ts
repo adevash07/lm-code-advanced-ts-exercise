@@ -9,17 +9,18 @@ export async function addUserMenu() {
 
 	const username = await prompt("Enter username");
 
+	console.log(username);
 	print("📨 Adding user...");
 
 	const status = await addUser(username);
+
+	console.log(status);
 
 	status && print(`🥳 ${username} added!`);
 
 	const users = await fetchAllUsers();
 
 	print(`🥳 Received ${users.length} users. Here they are:`);
-
-	console.log(users);
 
 	printNewLine();
 

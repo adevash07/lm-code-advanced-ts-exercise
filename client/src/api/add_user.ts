@@ -7,8 +7,9 @@ export async function addUser(username: string): Promise<boolean> {
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify(username),
+			body: JSON.stringify({ username: username }),
 		});
+		console.log(result);
 		const status: unknown = await result.json();
 
 		if (typeof status === "boolean") {
