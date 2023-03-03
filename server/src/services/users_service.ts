@@ -37,8 +37,18 @@ export function getUserById(id: string): User | undefined {
 
 export function addUser(user: User): boolean {
 	// in the absence of a true Model layer, our service can simply return a hard-coded array of users
-	console.log(`📨 Adding user ${user.name}`);
-	UserDatabase.push(user);
+
+	const newUser = {
+		...user,
+		id: (UserDatabase.length + 1).toString(),
+		creationDate: new Date(),
+	};
+
+	UserDatabase.push({ ...newUser });
+
+	if (UserDatabase.find((u) => u.id === newUser.id) === undefined) {
+		return false;
+	}
 
 	return true;
 }

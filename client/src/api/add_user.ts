@@ -9,11 +9,11 @@ export async function addUser(username: string): Promise<boolean> {
 			},
 			body: JSON.stringify({ username: username }),
 		});
-		console.log(result);
-		const status: unknown = await result.json();
 
-		if (typeof status === "boolean") {
-			return status;
+		const { success } = await result.json();
+
+		if (typeof success === "boolean") {
+			return success;
 		}
 
 		return false;

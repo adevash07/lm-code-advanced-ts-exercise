@@ -98,6 +98,8 @@ function addAPIRoutes(app: Express) {
 
 		const status = addUser(body.username);
 
+		console.log(`👋 Status "${status}"`);
+
 		res.status(200).send(JSON.stringify({ success: status }));
 	});
 
