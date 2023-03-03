@@ -1,5 +1,6 @@
 import { exit } from "./exit/exit";
 import { showMenu } from "./menu/menu";
+import { addPostMenu } from "./menu/options/add_post/add_post";
 import { addUserMenu } from "./menu/options/add_user/add_user";
 import { browsePosts } from "./menu/options/browse_posts/browse_posts";
 import { sendMessage } from "./menu/options/send_message/send_message";
@@ -47,6 +48,11 @@ async function main() {
 			case "ADD_USER":
 				clear("yes");
 				const username = await addUserMenu();
+				state.set(states.MENU);
+				break;
+			case "ADD_POST":
+				clear("yes");
+				const newPostTitle = await addPostMenu();
 				state.set(states.MENU);
 				break;
 			case "UNKNOWN":
